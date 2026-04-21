@@ -25,18 +25,25 @@
 //<-----------------------New Version using classes---------------------->
 
 #include "Led.h"
+#include "piezoPlayer.h"
 
 Led ledSlow = Led(2, 1000);
 Led ledFast = Led(4, 500);
+
+PiezoPlayer piezoPlayer = PiezoPlayer(9);
 
 void setup(){
   int currentTime = millis();
   ledSlow.setup(currentTime);
   ledFast.setup(currentTime);
+
+  piezoPlayer.setup(currentTime);
 }
 
 void loop(){
   int currentTime = millis();
   ledSlow.update(currentTime);
   ledFast.update(currentTime);
+
+  piezoPlayer.update(currentTime);
 }
