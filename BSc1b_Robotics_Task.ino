@@ -26,11 +26,14 @@
 
 #include "Led.h"
 #include "piezoPlayer.h"
+#include "Lcd.h"
 
 Led ledSlow = Led(2, 1000);
 Led ledFast = Led(4, 500);
 
 PiezoPlayer piezoPlayer = PiezoPlayer(9);
+
+Lcd lcdScreen = Lcd();
 
 void setup(){
   int currentTime = millis();
@@ -38,6 +41,8 @@ void setup(){
   ledFast.setup(currentTime);
 
   piezoPlayer.setup(currentTime);
+
+  lcdScreen.setup(currentTime);
 }
 
 void loop(){
@@ -46,4 +51,6 @@ void loop(){
   ledFast.update(currentTime);
 
   piezoPlayer.update(currentTime);
+
+  lcdScreen.update(currentTime);
 }
