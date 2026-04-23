@@ -5,5 +5,6 @@ class Lcd{
     int initialTime;
 
   private:
-    int speed = 500;
+    int speed = 150;
+    int currentState = 0;
 };

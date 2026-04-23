@@ -7,7 +7,7 @@ class PiezoPlayer {
 
   //setup &update call in setup & loop of .ino
   void setup (int currentTime);
-  void update(int currentTime);
+  void update(int currentTime, float dist_t);
 
   private:
 

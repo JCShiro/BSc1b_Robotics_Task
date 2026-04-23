@@ -42,36 +42,70 @@ void Lcd::setup(int currentTime) {
 }
 
 void Lcd::update(int currentTime) {
+
+  // discard unwanted cases
+  if(initialTime + speed > currentTime) return;
+
+  initialTime = currentTime;
+
+  if(currentState <= 30){
+    lcd.scrollDisplayLeft();
+    currentState++;
+    return;
+  }
+
+  if(currentState <=58){
+    lcd.scrollDisplayRight();
+    currentState++;
+    return;
+  }
+
+  if(currentState <=(58+16)){
+    lcd.scrollDisplayLeft();
+    currentState++;
+    return;
+  }
+  currentState = 0;
     // scroll 31 positions (string length) to the left
     // to move it offscreen left:
     // initialTime = currentTime;
-    if(initialTime + speed >= currentTime){
-    for (int positionCounter = 0; positionCounter < 31; positionCounter++) {
-        /**
-         *  @brief scroll left to display
-         */
-        lcd.scrollDisplayLeft();//scroll one position left
-    }
-
-    // scroll 29 positions (string length + show length) to the right
-    // to move it offscreen right:
-    if(initialTime + (3*speed))
-    for (int positionCounter = 0; positionCounter < 29; positionCounter++) {
-        /**
-         *  @brief scroll right to display
-         */
-        lcd.scrollDisplayRight();//scroll one position right
-        // wait a bit:
-    }
-
-    // scroll 16 positions (show length + string length) to the left
-    // to move it back to center:
-    for (int positionCounter = 0; positionCounter < 16; positionCounter++) {
-        // scroll one position left:
-        lcd.scrollDisplayLeft();
-        // wait a bit:
-    }
-    initialTime = currentTime;
-  }
+  //   if(initialTime + speed >= currentTime){
+  //     if(currentState <= 30){
+  //       currentState++;
+  //       initialTime = currentTime;
+  //     // for (int positionCounter = 0; positionCounter < 31; positionCounter++) {
+  //         /**
+  //         *  @brief scroll left to display
+  //         */
+  //         lcd.scrollDisplayLeft();//scroll one position left
+  //     // }
+  //     return;
+  //   }
+  //   // scroll 29 positions (string length + show length) to the right
+  //   // to move it offscreen right:
+  //   if(currentState == 1){
+  //     currentState++;
+  //     initialTime = currentTime;
+  //     for (int positionCounter = 0; positionCounter < 29; positionCounter++) {
+  //         /**
+  //         *  @brief scroll right to display
+  //         */
+  //         lcd.scrollDisplayRight();//scroll one position right
+  //         // wait a bit:
+  //     }
+  //     return;
+  //   }
+  //   // scroll 16 positions (show length + string length) to the left
+  //   // to move it back to center:
+  //   if(currentState == 2){
+  //     currentState = 0;
+  //     initialTime = currentTime;
+  //     for (int positionCounter = 0; positionCounter < 16; positionCounter++) {
+  //         // scroll one position left:
+  //         lcd.scrollDisplayLeft();
+  //         // wait a bit:
+  //     }
+  //   }
+  // }
 }
 

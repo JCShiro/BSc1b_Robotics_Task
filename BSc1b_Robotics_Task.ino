@@ -27,13 +27,16 @@
 #include "Led.h"
 #include "piezoPlayer.h"
 #include "Lcd.h"
+#include "DistSens.h"
 
-Led ledSlow = Led(2, 1000);
-Led ledFast = Led(4, 500);
+Led ledSlow = Led(2, 705.88);
+Led ledFast = Led(4, (705.88/2));
 
 PiezoPlayer piezoPlayer = PiezoPlayer(9);
 
 Lcd lcdScreen = Lcd();
+
+DistSens distSens = DistSens(A0);
 
 void setup(){
   int currentTime = millis();
@@ -43,14 +46,19 @@ void setup(){
   piezoPlayer.setup(currentTime);
 
   lcdScreen.setup(currentTime);
+
+  distSens.setup(currentTime);
 }
 
 void loop(){
   int currentTime = millis();
-  ledSlow.update(currentTime);
-  ledFast.update(currentTime);
+  float dist_t = distSens.getDistance(currentTime);
 
-  piezoPlayer.update(currentTime);
+  ledSlow.update(currentTime, dist_t);
+  ledFast.update(currentTime, dist_t);
+
+  piezoPlayer.update(currentTime, dist_t);
 
   lcdScreen.update(currentTime);
+
 }
