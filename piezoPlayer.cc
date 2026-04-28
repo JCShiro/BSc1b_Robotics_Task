@@ -11,7 +11,7 @@ void PiezoPlayer::setup(int currentTime) {
 }
 
 void PiezoPlayer::update(int currentTime, float dist_t) {
-  float actualDelay = delay_per_beat * map(dist_t,560,1,1,5);
+  float actualDelay = delay_per_beat * map(dist_t,0,560,1,5);
   if(currentTime - lastChangeOfNote >= note_lengths[currentNote]*actualDelay) {
     currentNote++;
     lastChangeOfNote = currentTime;
